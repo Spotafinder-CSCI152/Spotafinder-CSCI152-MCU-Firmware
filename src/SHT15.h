@@ -10,9 +10,8 @@ public:
   double getTemperatureC();
   double getHumidityLinear();
   double getHumidityTrue();
-  //void cloudRegister();
-  void Tick();
-
+  void readSensor();
+  
   #ifdef MYDEBUG
   void printVariables();
   #endif

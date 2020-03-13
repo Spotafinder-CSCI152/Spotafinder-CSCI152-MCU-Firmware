@@ -10,15 +10,6 @@ SHT15::SHT15 (int dataPin, int clockPin) {
   digitalWrite(_clockPin,LOW);		//clkPin  = 0
 }
 
-//cloud doesnt support returning doubles from functions. so dumb
-/*
-void SHT15::cloudRegister(){
-  // Example registering class method
-  // Particle.function("brew", &CoffeeMaker::brew, this);
-  Particle.function("getTempF", &SHT15::getTemperatureF, this);
-  Particle.function("getTempC", &SHT15::getTemperatureC, this);
-}
-*/
 
 #ifdef MYDEBUG
 //Start Debug Functions
@@ -59,10 +50,10 @@ double SHT15::getHumidityTrue(){
   return _humdityTrue;
 }
 
-void SHT15::Tick(){
+void SHT15::readSensor(){
   //read temp sensor
   _readDataRaw(0);
-  delay(1000);
+  delay(500);
   //read humidity sensor
   _readDataRaw(1);
 }

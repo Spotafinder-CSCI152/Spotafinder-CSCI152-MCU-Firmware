@@ -5,14 +5,36 @@
  * Date:
  */
 
-// setup() runs once, when the device is first turned on.
+#include "SHT15.h"
+
+#define RefreshRate 10000
+
+SHT15 sensorSHT15(D1, D0);
+double tempF, tempC, humidityLinear, humidityTrue, GMoisturePercentage;
+
+SYSTEM_MODE(MANUAL);
+
 void setup() {
-  // Put initialization like pinMode and begin functions here.
+  
+ Serial.begin(9600);
 
 }
 
-// loop() runs over and over again, as quickly as it can execute.
-void loop() {
-  // The core of your code will likely live here.
 
+void loop() {
+
+  sensorSHT15.readSensor();
+  tempF = sensorSHT15.getTemperatureF();
+  Serial.println(tempF);
+
+  tempC = sensorSHT15.getTemperatureC();
+  Serial.println(tempC);
+
+  humidityLinear = sensorSHT15.getHumidityLinear();
+  Serial.println(humidityLinear);
+
+  humidityTrue = sensorSHT15.getHumidityTrue();
+  Serial.println(humidityTrue);
+
+  delay(RefreshRate);
 }
