@@ -12,13 +12,14 @@
  */
 
 #include "SHT15.h"
+#include "MAX9814.h"
 void setup();
 void loop();
-#line 9 "d:/Gilbert/Offline_Projects/Spotafinder-CSCI152-MCU-Firmware/src/Spotafinder-CSCI152-MCU-Firmware.ino"
+#line 10 "d:/Gilbert/Offline_Projects/Spotafinder-CSCI152-MCU-Firmware/src/Spotafinder-CSCI152-MCU-Firmware.ino"
 #define MYDEBUG
 #define RefreshRate 10000
 
-
+MAX9814 sensorMAX9814(A5);
 SHT15 sensorSHT15(D1, D0);
 double tempF, tempC, humidityLinear, humidityTrue, GMoisturePercentage;
 
@@ -42,13 +43,14 @@ void loop() {
   humidityTrue = sensorSHT15.getHumidityTrue();
 
  #ifdef MYDEBUG
-  Serial.printlnf("tempf: %f" ,tempF);
+  Serial.printlnf("tempF: %f" ,tempF);
   Serial.printlnf("tempC: %f" ,tempC);
   Serial.printlnf("humidityLinear: %f" ,humidityLinear);
   Serial.printlnf("humidityTrue: %f" ,humidityTrue);
+  Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorCalibration());
  #endif
 
-  Serial1.printlnf("tempf: %f" ,tempF);
+  Serial1.printlnf("tempF: %f" ,tempF);
   Serial1.printlnf("tempC: %f" ,tempC);
   Serial1.printlnf("humidityLinear: %f" ,humidityLinear);
   Serial1.printlnf("humidityTrue: %f" ,humidityTrue);

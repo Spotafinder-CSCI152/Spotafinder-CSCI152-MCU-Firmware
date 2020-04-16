@@ -6,10 +6,11 @@
  */
 
 #include "SHT15.h"
+#include "MAX9814.h"
 #define MYDEBUG
 #define RefreshRate 10000
 
-
+MAX9814 sensorMAX9814(A5);
 SHT15 sensorSHT15(D1, D0);
 double tempF, tempC, humidityLinear, humidityTrue, GMoisturePercentage;
 
@@ -37,6 +38,7 @@ void loop() {
   Serial.printlnf("tempC: %f" ,tempC);
   Serial.printlnf("humidityLinear: %f" ,humidityLinear);
   Serial.printlnf("humidityTrue: %f" ,humidityTrue);
+  Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorCalibration());
  #endif
 
   Serial1.printlnf("tempF: %f" ,tempF);
