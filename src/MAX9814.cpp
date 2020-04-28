@@ -6,13 +6,13 @@ MAX9814::MAX9814(int analogPin){
     sensorAnalogPin = analogPin;
 }
 
-double MAX9814::SensorCalibration(){
+double MAX9814::SensorRead(){
 
     unsigned long startTime = millis();
     while (millis() - startTime < sampleFrame){
 
       sample = analogRead(sensorAnalogPin);
-      if (sample < 4096) { //12-bit ADC
+      if (sample < 4095) { //12-bit ADC
          if (sample > maxSignal){
             maxSignal = sample;  //find max
          }
@@ -22,6 +22,12 @@ double MAX9814::SensorCalibration(){
       }
    }
     peakToPeak = maxSignal - minSignal;
-    double voltage = (peakToPeak * 3.3) / 4096;
+    double voltage = (peakToPeak * 3.3) / 4095.0;
    return voltage;
+}
+
+
+void DebugInfo(){
+
+   //add print stuff
 }
