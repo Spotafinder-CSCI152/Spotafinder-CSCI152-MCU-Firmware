@@ -11,8 +11,10 @@ class MAX9814 {
     int sensorAnalogPin;
     const unsigned int sampleFrame = 50; //ms
     unsigned int sample;
-    double peakToPeak = 0;
-    unsigned int maxSignal = 0;
-    unsigned int minSignal = 4096;
+    double voltage;
+    double voltageMax = 2.45;
+    double peakToPeak;
+    unsigned int maxSignal;
+    unsigned int minSignal;
 
 };

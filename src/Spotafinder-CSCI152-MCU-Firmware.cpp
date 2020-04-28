@@ -62,10 +62,11 @@ void loop() {
   Serial1.printlnf("humidityTrue: %f" ,humidityTrue);
 
   }
-  
+
   //delay(RefreshRate);
   #ifdef MYDEBUG
-   Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorRead());
+   //Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorRead());
+   sensorMAX9814.DebugInfo();
   #endif
 
 }
