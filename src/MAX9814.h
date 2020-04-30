@@ -6,6 +6,7 @@ class MAX9814 {
     MAX9814(int analogPin);
     double sensorRead();
     void soundLevelProcess();
+    double getSoundLevel();
     void debugInfo(Stream& T);
 
     private:

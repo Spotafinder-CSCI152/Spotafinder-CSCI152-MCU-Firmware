@@ -60,6 +60,11 @@ void MAX9814::soundLevelProcess(){
    indexSec++;
 }
 
+
+double MAX9814::getSoundLevel(){
+   return soundlevel;
+}
+
 void MAX9814::debugInfo(Stream& T){
    //add print stuff
    T.printlnf("MAX9814 Voltage: %f" , this->sensorRead());
