@@ -58,6 +58,10 @@ void SHT15::readSensor(){
   _readDataRaw(1);
 }
 
+void SHT15::serialSendDataJson(Stream& T){
+  T.printlnf("{\"tempF\": %f,\"tempC\": %f,\"humidityLinear\": %f,\"humidityTrue\": %f}" ,this->getTemperatureF(),this->getTemperatureC(), this->getHumidityLinear(),this->getHumidityTrue());
+  //String data = "{\"tempF\": " + +",\"tempC\": 31.630000,\"humidityLinear\": 39.301001,\"humidityTrue\": 39.997416}";
+}
 
 // get unprocessed Sensor reading from SHT
 void SHT15::_readDataRaw(bool sensor) {

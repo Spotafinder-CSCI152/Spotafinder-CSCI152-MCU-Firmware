@@ -11,6 +11,7 @@ public:
   double getHumidityLinear();
   double getHumidityTrue();
   void readSensor();
+  void serialSendDataJson(Stream& T);
   
   #ifdef MYDEBUG
   void printVariables();

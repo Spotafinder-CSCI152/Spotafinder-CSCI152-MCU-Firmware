@@ -6,7 +6,7 @@ MAX9814::MAX9814(int analogPin){
     sensorAnalogPin = analogPin;
 }
 
-double MAX9814::SensorRead(){
+double MAX9814::sensorRead(){
 
    maxSignal = 0;
    minSignal = 4095;
@@ -28,13 +28,44 @@ double MAX9814::SensorRead(){
    return voltage;
 }
 
+void MAX9814::soundLevelProcess(){
+   
+   //if one second of readings recorded
+   if(indexSec >= size_1){
+      indexSec = 0;
+      secondSUM = 0;
+      exendedSUM = 0;
 
-void MAX9814::DebugInfo(){
+      //get average over second
+      for(int i=0;i<size_1;i++){
+         secondSUM += soundLvlSec[i];
+      }
+      soundLvlExtended[indexExtended] = secondSUM/size_1;//recored 1 sec
 
+      //get average over extended time
+      for(int i=0;i<size_2;i++){
+         exendedSUM += soundLvlExtended[i];
+      }
+      soundlevel = (exendedSUM/size_2)/voltageMax;
+      indexExtended++;
+
+   }
+
+   //30 1 second averages recorded
+   if(indexExtended >= size_2){
+         indexExtended = 0;     
+   }
+
+   soundLvlSec[indexSec] = this->sensorRead();
+   indexSec++;
+}
+
+void MAX9814::debugInfo(Stream& T){
    //add print stuff
-   Serial.printlnf("MAX9814 Voltage: %f" , this->SensorRead());
-   Serial.printlnf("peakToPeak: %f" , this->peakToPeak);
-   Serial.printlnf("maxSignal: %f" , this->maxSignal);
-   Serial.printlnf("minSignal: %f" , this->minSignal);
+   T.printlnf("MAX9814 Voltage: %f" , this->sensorRead());
+   T.printlnf("peakToPeak: %f" , this->peakToPeak);
+   T.printlnf("secondAVG: %f" , secondSUM/size_1);
+   T.printlnf("ExendedAVG: %f" , exendedSUM/size_2);
+   T.printlnf("SoundLvl: %f" , soundlevel);
    
 }

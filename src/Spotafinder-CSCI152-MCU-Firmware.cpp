@@ -36,8 +36,8 @@ void setup() {
 
 void loop() {
   
-  //for the audio sesnor to work we need a high samplle rate
-  //therefore we will use a non blocking delay 
+  //for the audio sesnor to work we need a high sample rate
+  //therefore non blocking delay 
   unsigned long currentDelayTime = millis();
   if (currentDelayTime - oldDelayTime >= RefreshRate) {
     oldDelayTime = currentDelayTime;
@@ -49,24 +49,14 @@ void loop() {
   humidityTrue = sensorSHT15.getHumidityTrue();
 
  #ifdef MYDEBUG
-  Serial.printlnf("tempF: %f" ,tempF);
-  Serial.printlnf("tempC: %f" ,tempC);
-  Serial.printlnf("humidityLinear: %f" ,humidityLinear);
-  Serial.printlnf("humidityTrue: %f" ,humidityTrue);
-  //Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorCalibration());
+  sensorSHT15.serialSendDataJson(Serial);
  #endif
 
-  Serial1.printlnf("tempF: %f" ,tempF);
-  Serial1.printlnf("tempC: %f" ,tempC);
-  Serial1.printlnf("humidityLinear: %f" ,humidityLinear);
-  Serial1.printlnf("humidityTrue: %f" ,humidityTrue);
-
+  sensorSHT15.serialSendDataJson(Serial1);
   }
 
-  //delay(RefreshRate);
   #ifdef MYDEBUG
-   //Serial.printlnf("MAX9814 Voltage: %f" ,sensorMAX9814.SensorRead());
-   sensorMAX9814.DebugInfo();
+   sensorMAX9814.debugInfo(Serial);
   #endif
-
+  sensorMAX9814.soundLevelProcess();
 }
