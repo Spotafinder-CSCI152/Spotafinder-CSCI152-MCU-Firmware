@@ -7,7 +7,7 @@
 
 #include "SHT15.h"
 #include "MAX9814.h"
-#define MYDEBUG
+//#define MYDEBUG
 #define RefreshRate 10000
 
 MAX9814 sensorMAX9814(A5);
@@ -48,9 +48,9 @@ void loop() {
     sendJsonData(Serial1);
   }
 
-  #ifdef MYDEBUG
+  //#ifdef MYDEBUG
   sensorMAX9814.debugInfo(Serial);
-  #endif
+  //#endif
   sensorMAX9814.soundLevelProcess();
 }
 

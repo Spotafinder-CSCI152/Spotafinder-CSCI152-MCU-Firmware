@@ -13,11 +13,11 @@
 
 #include "SHT15.h"
 #include "MAX9814.h"
+//#define MYDEBUG
 void setup();
 void loop();
 void sendJsonData(Stream& T);
-#line 10 "d:/Gilbert/Offline_Projects/Spotafinder-CSCI152-MCU-Firmware/src/Spotafinder-CSCI152-MCU-Firmware.ino"
-#define MYDEBUG
+#line 11 "d:/Gilbert/Offline_Projects/Spotafinder-CSCI152-MCU-Firmware/src/Spotafinder-CSCI152-MCU-Firmware.ino"
 #define RefreshRate 10000
 
 MAX9814 sensorMAX9814(A5);
@@ -58,9 +58,9 @@ void loop() {
     sendJsonData(Serial1);
   }
 
-  #ifdef MYDEBUG
+  //#ifdef MYDEBUG
   sensorMAX9814.debugInfo(Serial);
-  #endif
+  //#endif
   sensorMAX9814.soundLevelProcess();
 }
 
